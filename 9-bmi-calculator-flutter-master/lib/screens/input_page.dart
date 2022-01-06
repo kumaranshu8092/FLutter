@@ -24,6 +24,7 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         brightness: Brightness.dark,
         title: Center(child: Text('BMI CALCULATOR')),
@@ -70,148 +71,161 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Reusablecontainer(
-                    colour: kActiveCardColor,
-                    cardChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'HEIGHT',
-                          style: kLabelTextStyle,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          textBaseline: TextBaseline.alphabetic,
-                          children: [
-                            Text(
-                              height.toString(),
-                              style: kNumberstyle,
-                            ),
-                            Text(
-                              'cm',
-                              style: kLabelTextStyle,
-                            )
-                          ],
-                        ),
-                        SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            thumbColor: Color(0xFEEB1555),
-                            activeTrackColor: Colors.white,
-                            inactiveTrackColor: Color(0xFF8D8E98),
-                            overlayColor: Color(0x29EB1555),
-                            thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 15.0),
-                            overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 30.0),
+            child: SingleChildScrollView(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Reusablecontainer(
+                      colour: kActiveCardColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'HEIGHT',
+                            style: kLabelTextStyle,
                           ),
-                          child: Slider(
-                              value: height.toDouble(),
-                              min: 120.0,
-                              max: 255,
-                              onChanged: (double newValue) {
-                                setState(() {
-                                  height = newValue.round();
-                                });
-                              }),
-                        ),
-                      ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(
+                                height.toString(),
+                                style: kNumberstyle,
+                              ),
+                              Text(
+                                'cm',
+                                style: kLabelTextStyle,
+                              )
+                            ],
+                          ),
+                          SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              thumbColor: Color(0xFEEB1555),
+                              activeTrackColor: Colors.white,
+                              inactiveTrackColor: Color(0xFF8D8E98),
+                              overlayColor: Color(0x29EB1555),
+                              thumbShape:
+                                  RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                              overlayShape:
+                                  RoundSliderOverlayShape(overlayRadius: 30.0),
+                            ),
+                            child: Slider(
+                                value: height.toDouble(),
+                                min: 120.0,
+                                max: 255,
+                                onChanged: (double newValue) {
+                                  setState(() {
+                                    height = newValue.round();
+                                  });
+                                }),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
+          SizedBox(
+            height: 15.0,
+          ),
           Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Reusablecontainer(
-                    colour: kActiveCardColor,
-                    cardChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'WEIGHT(kg)',
-                          style: kLabelTextStyle,
-                        ),
-                        Text(
-                          weight.toString(),
-                          style: kNumberstyle,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RoundIconButton(
-                              icon: Icons.remove,
-                              onpressed: () {
-                                setState(() {
-                                  weight = weight - 1;
-                                });
-                              },
-                            ),
-                            SizedBox(
-                              width: 15.0,
-                            ),
-                            RoundIconButton(
-                              icon: Icons.add,
-                              onpressed: () {
-                                setState(() {
-                                  weight = weight + 1;
-                                });
-                              },
-                            ),
-                          ],
-                        )
-                      ],
+            child: SingleChildScrollView(
+              reverse: true,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Reusablecontainer(
+                      colour: kActiveCardColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'WEIGHT(kg)',
+                            style: kLabelTextStyle,
+                          ),
+                          Text(
+                            weight.toString(),
+                            style: kNumberstyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SingleChildScrollView(
+                                reverse: true,
+                                child: RoundIconButton(
+                                  icon: Icons.remove,
+                                  onpressed: () {
+                                    setState(() {
+                                      weight = weight - 1;
+                                    });
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                width: 15.0,
+                              ),
+                              Expanded(
+                                child: RoundIconButton(
+                                  icon: Icons.add,
+                                  onpressed: () {
+                                    setState(() {
+                                      weight = weight + 1;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Reusablecontainer(
-                    colour: kActiveCardColor,
-                    cardChild: Column(
-                      children: [
-                        Text(
-                          'AGE',
-                          style: kLabelTextStyle,
-                        ),
-                        Text(
-                          age.toString(),
-                          style: kNumberstyle,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RoundIconButton(
-                              icon: Icons.remove,
-                              onpressed: () {
-                                setState(() {
-                                  age--;
-                                });
-                              },
-                            ),
-                            SizedBox(
-                              width: 15.0,
-                            ),
-                            RoundIconButton(
-                              icon: Icons.add,
-                              onpressed: () {
-                                setState(() {
-                                  age++;
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                      ],
+                  Expanded(
+                    child: Reusablecontainer(
+                      colour: kActiveCardColor,
+                      cardChild: Column(
+                        children: [
+                          Text(
+                            'AGE',
+                            style: kLabelTextStyle,
+                          ),
+                          Text(
+                            age.toString(),
+                            style: kNumberstyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundIconButton(
+                                icon: Icons.remove,
+                                onpressed: () {
+                                  setState(() {
+                                    age--;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: 15.0,
+                              ),
+                              RoundIconButton(
+                                icon: Icons.add,
+                                onpressed: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
           BottomButton(
